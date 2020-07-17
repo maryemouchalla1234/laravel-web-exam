@@ -35,7 +35,7 @@
         <input id="url" type="hidden" value="{{ \Request::url() }}"> 
 
         <!-- MODAL SECTION -->
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div  id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
@@ -43,11 +43,12 @@
                 <h4 class="modal-title" id="myModalLabel">Offre Form</h4>
               </div>
               <div class="modal-body">
-                <form id="frmProducts" name="frmProducts" class="form-horizontal" novalidate="">
+                <form method="post"  enctype="multipart/form-data" action="{{ route('offre.store') }}" id="frmProducts" name="frmProducts" class="form-horizontal" novalidate="">
+                  @csrf
                   <div class="form-group error">
                     <label for="inputName" class="col-sm-3 control-label">Adrese</label>
                     <div class="col-sm-9">
-                      <input type="text" class="form-control has-error" id="adrese" name="name" placeholder="adresse" value="">
+                      <input type="text" class="form-control has-error" id="adrese" name="adrese" placeholder="adresse" value="">
                     </div>
                   </div>
                   <div class="form-group">
@@ -55,21 +56,25 @@
                     <div class="col-sm-9">
                       <input type="number" class="form-control" id="prix" name="prix" placeholder="Price" value="">
                     </div>
-
-					<div class="form-group">
+                  </div>
+			        		<div class="form-group">
                     <label for="inputDetail" class="col-sm-3 control-label">capacité</label>
                     <div class="col-sm-9">
                       <input type="number" class="form-control" id="capacite" name="capacite" placeholder="capacité" value="">
                     </div>
-
-
+                  </div>
+                  <div class="form-group">
+                    <label for="inputDetail" class="col-sm-3 control-label">image</label>
+                    <div class="col-sm-9">
+                      <input type="file" class="form-control" id="capacite" name="image" placeholder="capacité" value="">
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
                   </div>
                 </form>
               </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="btn-save" value="add">Save Changes</button>
-                <input type="hidden" id="offre_id" name="offre_id" value="0">
-              </div>
+              
             </div>
           </div>
         </div>

@@ -25,13 +25,17 @@
             <div class="row">
                 <div class="col-lg-12 margin-tb">
                     <div class="pull-right">
-                        <button id="btn_add" name="btn_add" class="btn btn-default pull-right">Add New offre</button>
+                      <a href="{{ route('offre.create') }}" class="btn btn-default pull-right">Add a new Offre</a>
                     </div>
                 </div>
             </div>
-            
+            @if (session('status'))
+                <div class="alert alert-success">
+                    {{ session('status') }}
+                </div>
+            @endif
             <div class="row">
-                <div class="col-md-8 col-md-offset-2">
+                <div class="col-md-12">
                     <table class="table table-striped table-hover ">
                         <thead>
                             <tr class="info">
@@ -50,10 +54,16 @@
                                   <td>{{$offre->adrese}}</td>
                                   <td>{{$offre->prix}}</td>
 								  <td>{{$offre->capacite}}</td>
-								  <td>{{$offre->image}}</td>
+								  <td>
+                    <img width="300px" height="200px" src="{{ asset('storage/' . $offre->image) }}" alt="">
+                  </td>
                                   <td width="35%">
                                       <button class="btn btn-warning btn-detail open_modal" value="{{$offre->id}}">Edit</button>
-                                      <button class="btn btn-danger btn-delete delete-offre" value="{{$offre->id}}">Delete</button>
+                                     <form style="display: unset;" method="POST" action="{{ route('offre.destroy', ['id' => $offre->id]) }}">
+                                      @csrf
+                                      @method('DELETE')
+                                      <button class="btn btn-danger btn-delete delete-offre" type="submit"">Delete</button>
+                                    </form>
                                   </td>
                               </tr>
                             @endforeach
